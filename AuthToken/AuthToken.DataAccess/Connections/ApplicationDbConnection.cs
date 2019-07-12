@@ -12,7 +12,7 @@ namespace AuthToken.DataAccess.Connections
         public ApplicationDbConnection(DbContextOptions<ApplicationDbConnection> options)
             : base(options)
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
