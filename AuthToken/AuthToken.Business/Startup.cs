@@ -15,10 +15,9 @@ namespace AuthToken.Business
        
         public static void ConfigureServices(string connectionString, IServiceCollection services)
         {
-            AuthToken.DataAccess.Startup.RegisterDependencies(connectionString, services);
-
             services.AddScoped<IBooksService, BooksService>();
 
+            AuthToken.DataAccess.Startup.RegisterDependencies(connectionString, services);
         }
     }
 }

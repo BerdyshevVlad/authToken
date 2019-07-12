@@ -16,7 +16,6 @@ namespace AuthToken.DataAccess.Repositories
 
         public BooksRepository(ApplicationDbConnection context)
         {
-            //_context = new ApplicationDbConnection(new DbContextOptions<ApplicationDbConnection>());
             _context = context;
         }
 
