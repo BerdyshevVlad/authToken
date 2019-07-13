@@ -24,7 +24,7 @@ namespace AuthToken.Controllers
         {
             var result = _accountService.SignIn("berdyshev1997@gmail.com", "Qwe123!!");
 
-            return Ok(result);
+            return Ok(result); 
         }
     }
 }
