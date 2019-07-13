@@ -1,13 +1,9 @@
 ﻿using AuthToken.Business.Services;
 using AuthToken.Business.Services.Interfaces;
-using AuthToken.DataAccess.Connections;
 using AuthToken.DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AuthToken.Business
@@ -18,6 +14,7 @@ namespace AuthToken.Business
         public static void ConfigureServices(string connectionString, IServiceCollection services)
         {
             services.AddScoped<IBooksService, BooksService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             services.Configure<IdentityOptions>(options =>
             {
