@@ -226,7 +226,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connections\ApplicationDbConnection.cs" />
+    <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\ApplicationUserRole.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
