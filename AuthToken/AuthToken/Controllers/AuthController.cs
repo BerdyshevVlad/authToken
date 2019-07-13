@@ -20,7 +20,7 @@ namespace AuthToken.Controllers
 
         [HttpGet]
         [Route("LogIn")]
-        public IActionResult Get()
+        public IActionResult LogIn()
         {
             var result = _accountService.SignIn("berdyshev1997@gmail.com", "Qwe123!!");
 
