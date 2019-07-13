@@ -11,20 +11,20 @@ namespace AuthToken.Controllers
     [Route("api/Auth")]
     public class AuthController : Controller
     {
-        private readonly IBooksService _booksService;
+        private readonly IAccountService _accountService;
 
-        public AuthController(IBooksService booksService)
+        public AuthController(IBooksService booksService, IAccountService accountService)
         {
-            _booksService = booksService;
+            _accountService = accountService;
         }
 
         [HttpGet]
         [Route("LogIn")]
-        public IActionResult Get()
+        public IActionResult LogIn()
         {
-            _booksService.AddBook();
+            var result = _accountService.SignIn("berdyshev1997@gmail.com", "Qwe123!!");
 
-            return Ok(new string[] { "Perfecto!" });
+            return Ok(result); 
         }
     }
 }
