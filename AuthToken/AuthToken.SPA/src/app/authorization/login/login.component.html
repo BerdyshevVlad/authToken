@@ -1,1 +1,6 @@
-<p>login works!</p>
+<div *ngIf="userData">
+  <p>Success login! Your token is: {{userData.token}}</p>
+  <p>User email: {{userData.user.userEmail}}</p>
+  <p>User name: {{userData.user.userName}}</p>
+  <p>User id: {{userData.user.userId}}</p>
+</div>

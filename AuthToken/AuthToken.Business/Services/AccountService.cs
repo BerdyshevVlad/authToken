@@ -26,7 +26,7 @@ namespace AuthToken.Business.Services
             _signInManager = signInManager;
         }
 
-        public SignInAccountView SignIn(string email,string password)
+        public LogInAccountView SignIn(string email,string password)
         {
             ApplicationUser identityUser = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                 .SingleOrDefault(x => x.NormalizedUserName == email.ToUpper());
@@ -56,7 +56,7 @@ namespace AuthToken.Business.Services
             }
 
             var authToken = GenerateJwtToken(identityUser);
-            var userData = new SignInAccountViewItem
+            var userData = new LogInAccountViewItem
             {
                 UserEmail = identityUser.Email,
                 UserId = identityUser.Id,
@@ -65,7 +65,7 @@ namespace AuthToken.Business.Services
                 UserRoleId = identityRole
             };
 
-            var authData = new SignInAccountView
+            var authData = new LogInAccountView
             {
                 Token = authToken,
                 User = userData

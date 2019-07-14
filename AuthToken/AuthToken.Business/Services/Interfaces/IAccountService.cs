@@ -9,6 +9,6 @@ namespace AuthToken.Business.Services.Interfaces
 {
     public interface IAccountService
     {
-        SignInAccountView SignIn(string email, string password);
+        LogInAccountView SignIn(string email, string password);
     }
 }

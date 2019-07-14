@@ -42,9 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\Items\SignInAccountViewItem.cs" />
-    <Compile Include="Account\SignInAccountView.cs" />
-    <Compile Include="Models\SignInViewModel.cs" />
+    <Compile Include="Account\Items\LogInAccountViewItem.cs" />
+    <Compile Include="Account\LogInAccountView.cs" />
+    <Compile Include="Models\LogInViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

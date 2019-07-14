@@ -202,6 +202,8 @@
     <TypeScriptCompile Include="src\app\authorization\authorization.component.ts" />
     <TypeScriptCompile Include="src\app\authorization\login\login.component.ts" />
     <TypeScriptCompile Include="src\app\services\authentication.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\user-data.model.ts" />
+    <TypeScriptCompile Include="src\app\shared\models\user.model.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />

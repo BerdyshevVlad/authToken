@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/Authentication.service';
+import { User } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { AuthenticationService } from '../../services/Authentication.service';
 })
 export class LogInComponent implements OnInit {
 
-  private userData: any;
+  private userData: User;
 
   constructor(private authenticationService: AuthenticationService) { }
 
@@ -17,7 +18,7 @@ export class LogInComponent implements OnInit {
   }
 
   private login() {
-    this.authenticationService.login("berdyshev1997@gmail.com", "Qwe123!!").subscribe((data) => {
+    this.authenticationService.login("berdyshev1997@gmail.com", "Qwe123!!").subscribe((data: User) => {
       this.userData = data;
       console.log(this.userData);
     });

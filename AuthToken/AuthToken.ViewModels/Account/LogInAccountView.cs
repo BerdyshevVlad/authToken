@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace AuthToken.ViewModels.Account
 {
-    public class SignInAccountView
+    public class LogInAccountView
     {
         public string Token { get; set; }
-        public SignInAccountViewItem User { get; set; }
+        public LogInAccountViewItem User { get; set; }
     }
 }

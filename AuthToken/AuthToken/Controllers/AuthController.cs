@@ -18,7 +18,7 @@ namespace AuthToken.Controllers
         [HttpPost]
         [Route("LogIn")]
         [AllowAnonymous]
-        public IActionResult LogIn(SignInViewModel model)
+        public IActionResult LogIn(LogInViewModel model)
         {
             var result = _accountService.SignIn("berdyshev1997@gmail.com", "Qwe123!!");
 

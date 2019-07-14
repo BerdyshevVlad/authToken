@@ -29,20 +29,20 @@ export class AuthenticationService {
     let options = { headers: headers };
 
     return this.http.post<any>(
-        `http://localhost:1194/api/auth/login`,
-        JSON.stringify(loginForm),options)
-      .pipe(
-        map(response => {
-          if (response.token && response.user) {
-            const user = <any>{
-              token: response.token,
-              user: response.user
-            };
+      `http://localhost:1194/api/auth/login`,
+      JSON.stringify(loginForm), options);
+      //.pipe(
+      //  map(response => {
+      //    if (response.token && response.user) {
+      //      const user = <any>{
+      //        token: response.token,
+      //        user: response.user
+      //      };
 
-            return user;
-          }
-        })
-      );
+      //      return user;
+      //    }
+      //  })
+      //);
   }
 
 }
