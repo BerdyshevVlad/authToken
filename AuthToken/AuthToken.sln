@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthToken.Business", "AuthT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthToken.ViewModels", "AuthToken.ViewModels\AuthToken.ViewModels.csproj", "{A73B11CF-24D3-4C31-A5F2-0375F1E6A569}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthToken.SPA", "AuthToken.SPA\AuthToken.SPA.csproj", "{F397AE77-2AF6-4E58-ABCE-658AF9DD8AD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A73B11CF-24D3-4C31-A5F2-0375F1E6A569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A73B11CF-24D3-4C31-A5F2-0375F1E6A569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A73B11CF-24D3-4C31-A5F2-0375F1E6A569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F397AE77-2AF6-4E58-ABCE-658AF9DD8AD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F397AE77-2AF6-4E58-ABCE-658AF9DD8AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F397AE77-2AF6-4E58-ABCE-658AF9DD8AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F397AE77-2AF6-4E58-ABCE-658AF9DD8AD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

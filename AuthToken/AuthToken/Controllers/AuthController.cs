@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AuthToken.Business.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using AuthToken.Business.Services.Interfaces;
+using AuthToken.ViewModels.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthToken.Controllers
@@ -18,9 +15,10 @@ namespace AuthToken.Controllers
             _accountService = accountService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("LogIn")]
-        public IActionResult LogIn()
+        [AllowAnonymous]
+        public IActionResult LogIn(SignInViewModel model)
         {
             var result = _accountService.SignIn("berdyshev1997@gmail.com", "Qwe123!!");
 
