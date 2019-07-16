@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuthToken.ViewModels.Books;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace AuthToken.Business.Services.Interfaces
 {
     public interface IBooksService
     {
-        void AddBook();
+        void Add();
+        List<GetBooksView> GetList();
+        GetByIdBooksView GetById(int bookId);
     }
 }

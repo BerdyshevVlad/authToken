@@ -10,6 +10,10 @@ namespace AuthToken.DataAccess.Repositories.Interfaces
     public interface IBooksRepository
     {
         void Create(Book book);
+        List<Book> GetList();
+        Book Get(int id);
+        void Update(Book book);
+        void Delete(int id);
         void Save();
     }
 }

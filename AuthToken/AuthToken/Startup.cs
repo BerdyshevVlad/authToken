@@ -106,6 +106,7 @@ namespace AuthToken
             }
 
             app.UseCors("policy");
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 

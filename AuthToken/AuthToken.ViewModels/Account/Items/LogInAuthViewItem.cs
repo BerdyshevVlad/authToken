@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AuthToken.ViewModels.Account.Items
 {
-    public class LogInAccountViewItem
+    public class LogInAuthViewItem
     {
         public string UserEmail { get; set; }
         public string UserId { get; set; }

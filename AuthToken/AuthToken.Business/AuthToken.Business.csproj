@@ -220,6 +220,7 @@
       <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -230,8 +231,10 @@
   <ItemGroup>
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\BooksService.cs" />
+    <Compile Include="Services\EmailSender.cs" />
     <Compile Include="Services\Interfaces\IAccountService.cs" />
     <Compile Include="Services\Interfaces\IBooksService.cs" />
+    <Compile Include="Services\Interfaces\IEmailSender.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

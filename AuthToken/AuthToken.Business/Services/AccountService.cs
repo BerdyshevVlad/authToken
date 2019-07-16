@@ -2,6 +2,7 @@
 using AuthToken.DataAccess.Entities;
 using AuthToken.ViewModels.Account;
 using AuthToken.ViewModels.Account.Items;
+using AuthToken.ViewModels.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Web;
 
 namespace AuthToken.Business.Services
 {
@@ -18,15 +20,17 @@ namespace AuthToken.Business.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailSender _emailSender;
 
         public AccountService(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
 
-        public LogInAccountView SignIn(string email,string password)
+        public LogInAuthView LogIn(string email,string password)
         {
             ApplicationUser identityUser = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
                 .SingleOrDefault(x => x.NormalizedUserName == email.ToUpper());
@@ -56,7 +60,7 @@ namespace AuthToken.Business.Services
             }
 
             var authToken = GenerateJwtToken(identityUser);
-            var userData = new LogInAccountViewItem
+            var userData = new LogInAuthViewItem
             {
                 UserEmail = identityUser.Email,
                 UserId = identityUser.Id,
@@ -65,13 +69,66 @@ namespace AuthToken.Business.Services
                 UserRoleId = identityRole
             };
 
-            var authData = new LogInAccountView
+            var authData = new LogInAuthView
             {
                 Token = authToken,
                 User = userData
             };
 
             return authData;
+        }
+
+
+        public void SignUp(SignUpAuthViewModel model)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                LastName = model.LastName,
+                FirstName = model.FirstName
+            };
+            var result = _userManager.CreateAsync(user, model.Password).GetAwaiter().GetResult();
+            if (!result.Succeeded)
+            {
+                throw new ApplicationException(result.Errors.FirstOrDefault()?.Description);
+            }
+
+            var appUser = _userManager.Users.SingleOrDefault(r => r.Email == model.Email);
+            _userManager.AddToRoleAsync(appUser, "user").GetAwaiter().GetResult();
+
+            var code = _userManager.GenerateEmailConfirmationTokenAsync(user).GetAwaiter().GetResult();
+            string codeHtmlVersion = HttpUtility.UrlEncode(code);
+
+            var baseUrl = "http://localhost:1194";
+            var confirmLink = $"{baseUrl}/api/auth/confirmEmail?userId={user.Id}&code={codeHtmlVersion}";
+
+            var subject = "Welcome to App";
+            var test =_emailSender.SendMail(user.Email, subject, confirmLink);
+        }
+
+
+        public bool ConfirmEmail(ConfirmEmailAuthViewModel model)
+        {
+            if (string.IsNullOrEmpty(model.UserId) || string.IsNullOrEmpty(model.Code))
+            {
+                throw new ApplicationException("User not found.");
+            }
+            ApplicationUser user = _userManager.FindByIdAsync(model.UserId).GetAwaiter().GetResult();
+
+            if (user == null)
+            {
+                throw new ApplicationException("User not found.");
+            }
+
+            var validCode = model.Code.Replace(" ", "+");
+            var confirmEmailResult = _userManager.ConfirmEmailAsync(user, validCode).GetAwaiter().GetResult();
+            if (!confirmEmailResult.Succeeded)
+            {
+                throw new ApplicationException("User confirm email error.");
+            }
+
+            return confirmEmailResult.Succeeded;
         }
 
 

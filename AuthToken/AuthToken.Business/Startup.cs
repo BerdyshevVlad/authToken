@@ -15,6 +15,7 @@ namespace AuthToken.Business
         {
             services.AddScoped<IBooksService, BooksService>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IEmailSender, EmailSender>();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -47,12 +48,18 @@ namespace AuthToken.Business
             var roleManager = serviceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleName = "admin";
+            var roleNameUser = "user";
             IdentityResult roleResult;
 
             var roleExist = await roleManager.RoleExistsAsync(roleName);
+            var roleUserExist = await roleManager.RoleExistsAsync(roleNameUser);
             if (!roleExist)
             {
                 roleResult = await roleManager.CreateAsync(new ApplicationRole(roleName));
+            }
+            if (!roleUserExist)
+            {
+                roleResult = await roleManager.CreateAsync(new ApplicationRole(roleNameUser));
             }
 
             string email = "berdyshev1997@gmail.com";

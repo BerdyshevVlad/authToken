@@ -1,4 +1,5 @@
 ﻿using AuthToken.ViewModels.Account;
+using AuthToken.ViewModels.Models.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace AuthToken.Business.Services.Interfaces
 {
     public interface IAccountService
     {
-        LogInAccountView SignIn(string email, string password);
+        LogInAuthView LogIn(string email, string password);
+        void SignUp(SignUpAuthViewModel model);
+        bool ConfirmEmail(ConfirmEmailAuthViewModel model);
     }
 }

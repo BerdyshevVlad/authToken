@@ -19,12 +19,12 @@ namespace AuthToken.DataAccess.Repositories
             _context = context;
         }
 
-        public IEnumerable<Book> GetBookList()
+        public List<Book> GetList()
         {
-            return _context.Books;
+            return _context.Books.ToList();
         }
 
-        public Book GetBook(int id)
+        public Book Get(int id)
         {
             return _context.Books.Find(id);
         }
