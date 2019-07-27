@@ -16,13 +16,13 @@ using System.Web;
 
 namespace AuthToken.Business.Services
 {
-    public class AccountService : IAccountService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
-        public AccountService(UserManager<ApplicationUser> userManager,
+        public AuthService(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -30,10 +30,12 @@ namespace AuthToken.Business.Services
             _emailSender = emailSender;
         }
 
-        public LogInAuthView LogIn(string email,string password)
+        public LogInAuthView LogIn(LogInAuthViewModel model)
         {
+            //model.Password= "Qwe123!!!";
+            //model.Email = "berdyshev1997@gmail.com";
             ApplicationUser identityUser = _userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
-                .SingleOrDefault(x => x.NormalizedUserName == email.ToUpper());
+                .SingleOrDefault(x => x.NormalizedUserName == model.Email.ToUpper());
 
             if (identityUser == null)
             {
@@ -48,7 +50,7 @@ namespace AuthToken.Business.Services
                 throw new ApplicationException("Email not confirmed.");
             }
 
-            var signInResult =  _signInManager.PasswordSignInAsync(identityUser, password, false, true).GetAwaiter().GetResult();
+            var signInResult =  _signInManager.PasswordSignInAsync(identityUser, model.Password, false, true).GetAwaiter().GetResult();
             if (signInResult == SignInResult.Failed)
             {
                 throw new ApplicationException("Invalid login attempt.");

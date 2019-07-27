@@ -229,10 +229,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\BooksService.cs" />
     <Compile Include="Services\EmailSender.cs" />
-    <Compile Include="Services\Interfaces\IAccountService.cs" />
+    <Compile Include="Services\Interfaces\IAuthService.cs" />
     <Compile Include="Services\Interfaces\IBooksService.cs" />
     <Compile Include="Services\Interfaces\IEmailSender.cs" />
     <Compile Include="Startup.cs" />

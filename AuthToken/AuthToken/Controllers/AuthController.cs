@@ -9,9 +9,9 @@ namespace AuthToken.Controllers
     [Route("api/Auth")]
     public class AuthController : Controller
     {
-        private readonly IAccountService _accountService;
+        private readonly IAuthService _accountService;
 
-        public AuthController(IBooksService booksService, IAccountService accountService)
+        public AuthController(IBooksService booksService, IAuthService accountService)
         {
             _accountService = accountService;
         }
@@ -19,9 +19,9 @@ namespace AuthToken.Controllers
         [HttpPost]
         [Route("LogIn")]
         [AllowAnonymous]
-        public IActionResult LogIn(LogInAuthViewModel model)
+        public IActionResult LogIn([FromBody]LogInAuthViewModel model)
         {
-            var result = _accountService.LogIn("berdyshev1997@gmail.com", "Qwe123!!");
+            var result = _accountService.LogIn(model);
 
             return Ok(result);
         }
@@ -30,7 +30,7 @@ namespace AuthToken.Controllers
         [HttpPost]
         [Route("SignUp")]
         [AllowAnonymous]
-        public IActionResult SignUp(SignUpAuthViewModel model)
+        public IActionResult SignUp([FromBody]SignUpAuthViewModel model)
         {
             SignUpAuthViewModel view = new SignUpAuthViewModel();
             view.Birthday = DateTime.Now;

@@ -14,7 +14,7 @@ namespace AuthToken.Business
         public static void ConfigureServices(string connectionString, IServiceCollection services)
         {
             services.AddScoped<IBooksService, BooksService>();
-            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IEmailSender, EmailSender>();
 
             services.Configure<IdentityOptions>(options =>

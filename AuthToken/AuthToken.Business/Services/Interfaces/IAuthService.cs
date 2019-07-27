@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace AuthToken.Business.Services.Interfaces
 {
-    public interface IAccountService
+    public interface IAuthService
     {
-        LogInAuthView LogIn(string email, string password);
+        LogInAuthView LogIn(LogInAuthViewModel model);
         void SignUp(SignUpAuthViewModel model);
         bool ConfirmEmail(ConfirmEmailAuthViewModel model);
     }

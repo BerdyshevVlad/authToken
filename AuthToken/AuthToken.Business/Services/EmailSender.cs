@@ -14,7 +14,7 @@ namespace AuthToken.Business.Services
             {
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
                 MailMessage mailMessage = new MailMessage();
-                mailMessage.From = new MailAddress("berdyshev1997@gmail.com", "TokenAuthApp");
+                mailMessage.From = new MailAddress("giftshare.qwe@gmail.com", "TokenAuthApp");
                 mailMessage.To.Add(email);
                 mailMessage.IsBodyHtml = true;
                 mailMessage.Subject = subject;
@@ -22,7 +22,7 @@ namespace AuthToken.Business.Services
 
                 smtpClient.Port = 25;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new System.Net.NetworkCredential("berdyshev1997@gmail.com", "pass");
+                smtpClient.Credentials = new System.Net.NetworkCredential("giftshare.qwe@gmail.com", "password");
                 smtpClient.EnableSsl = true;
                 smtpClient.Timeout = 10000;
 
