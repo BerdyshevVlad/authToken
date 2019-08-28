@@ -31,18 +31,72 @@ export class AuthenticationService {
     return this.http.post<any>(
       `http://localhost:1194/api/auth/login`,
       JSON.stringify(loginForm), options);
-      //.pipe(
-      //  map(response => {
-      //    if (response.token && response.user) {
-      //      const user = <any>{
-      //        token: response.token,
-      //        user: response.user
-      //      };
-
-      //      return user;
-      //    }
-      //  })
-      //);
   }
 
+  signup(email: string, password: string): Observable<any> {
+    const signupForm = {
+      Email: email,
+      Password: password
+    };
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let options = { headers: headers };
+
+    return this.http.post<any>(
+      `http://localhost:1194/api/auth/signup`,
+      JSON.stringify(signupForm), options);
+  }
+
+
+  resetPassword(resetForm:any) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let options = { headers: headers };
+
+    return this.http.post<any>(
+      `http://localhost:1194/api/auth/resetPassword`,
+      JSON.stringify(resetForm), options);
+  }
+
+
+  forgotPassword(email: string) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let options = { headers: headers };
+
+    let forgotPasswordForm = {
+      email: email
+    };
+
+    return this.http.post<any>(
+      `http://localhost:1194/api/auth/forgotPassword`,
+      JSON.stringify(forgotPasswordForm), options);
+  }
+
+  emailConfirm(userId: string, code: string) {
+    const obj = {
+      userId: userId,
+      code: code
+    };
+
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    let options = { headers: headers };
+
+    return this.http.post<any>(
+      `http://localhost:1194/api/auth/confirmEmail`, JSON.stringify(obj), options);
+  }
 }

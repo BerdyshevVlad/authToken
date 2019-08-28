@@ -13,5 +13,8 @@ namespace AuthToken.Business.Services.Interfaces
         LogInAuthView LogIn(LogInAuthViewModel model);
         void SignUp(SignUpAuthViewModel model);
         bool ConfirmEmail(ConfirmEmailAuthViewModel model);
+        void ForgotPassword(ForgotPasswordAuthViewModel model);
+        void ResetPassword(ResetPasswordAuthViewModel model);
+        void ChangePassword(string email,ChangePasswordAuthViewModel model);
     }
 }

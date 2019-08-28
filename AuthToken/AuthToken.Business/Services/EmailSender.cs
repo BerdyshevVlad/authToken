@@ -22,7 +22,7 @@ namespace AuthToken.Business.Services
 
                 smtpClient.Port = 25;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new System.Net.NetworkCredential("giftshare.qwe@gmail.com", "password");
+                smtpClient.Credentials = new System.Net.NetworkCredential("giftshare.qwe@gmail.com", "Qwe123!!Qwe123!!");
                 smtpClient.EnableSsl = true;
                 smtpClient.Timeout = 10000;
 

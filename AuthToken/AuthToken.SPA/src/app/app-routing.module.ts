@@ -4,9 +4,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: "",
+    loadChildren: "./home/home.module#HomeModule"
+  },
+  {
     path: "authorization",
     loadChildren: "./authorization/authorization.module#AuthorizationModule"
-  }];
+  },
+  { path: "**", redirectTo: "" }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

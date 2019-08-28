@@ -1,5 +1,7 @@
 ﻿using AuthToken.Business.Services.Interfaces;
+using AuthToken.Extensions;
 using AuthToken.ViewModels.Models.Auth;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -45,14 +47,46 @@ namespace AuthToken.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("ConfirmEmail")]
         [AllowAnonymous]
-        public IActionResult ConfirmEmail(ConfirmEmailAuthViewModel model)
+        public IActionResult ConfirmEmail([FromBody] ConfirmEmailAuthViewModel model)
         {
             var result = _accountService.ConfirmEmail(model);
 
             return Ok(result);
+        }
+
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword([FromBody]ForgotPasswordAuthViewModel model)
+        {
+            _accountService.ForgotPassword(model);
+            return Ok();
+        }
+
+
+        [HttpPost]
+        [Route("ResetPassword")]
+        [AllowAnonymous]
+        public IActionResult ResetPassword([FromBody]ResetPasswordAuthViewModel model)
+        {
+            _accountService.ResetPassword(model);
+            return Ok();
+        }
+
+
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("changePassword")]
+        public IActionResult ChangePassword([FromBody]ChangePasswordAuthViewModel model)
+        {
+            var email = User.Identity.GetUserEmail();
+
+            _accountService.ChangePassword(email,model);
+            return Ok();
         }
     }
 }

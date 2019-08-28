@@ -24,6 +24,7 @@ namespace AuthToken.Controllers
 
         [HttpGet]
         [Route("getBooks")]
+        [AllowAnonymous]
         public IActionResult Get()
         {
             var view = _booksService.GetList();

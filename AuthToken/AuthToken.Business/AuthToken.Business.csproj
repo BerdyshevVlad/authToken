@@ -229,6 +229,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\IdentityResultExtensions.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\BooksService.cs" />
     <Compile Include="Services\EmailSender.cs" />

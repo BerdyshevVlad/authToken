@@ -1,10 +1,12 @@
-﻿using AuthToken.Business.Services.Interfaces;
+﻿using AuthToken.Business.Extensions;
+using AuthToken.Business.Services.Interfaces;
 using AuthToken.DataAccess.Entities;
 using AuthToken.ViewModels.Account;
 using AuthToken.ViewModels.Account.Items;
 using AuthToken.ViewModels.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -21,13 +23,16 @@ namespace AuthToken.Business.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private readonly IConfiguration _configuration;
 
         public AuthService(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
+            SignInManager<ApplicationUser> signInManager, IEmailSender emailSender,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _configuration = configuration;
         }
 
         public LogInAuthView LogIn(LogInAuthViewModel model)
@@ -102,8 +107,8 @@ namespace AuthToken.Business.Services
             var code = _userManager.GenerateEmailConfirmationTokenAsync(user).GetAwaiter().GetResult();
             string codeHtmlVersion = HttpUtility.UrlEncode(code);
 
-            var baseUrl = "http://localhost:1194";
-            var confirmLink = $"{baseUrl}/api/auth/confirmEmail?userId={user.Id}&code={codeHtmlVersion}";
+            var baseUrl = _configuration["BackEndUrl"];
+            var confirmLink = $"{baseUrl}api/auth/confirmEmail?userId={user.Id}&code={codeHtmlVersion}";
 
             var subject = "Welcome to App";
             var test =_emailSender.SendMail(user.Email, subject, confirmLink);
@@ -134,6 +139,65 @@ namespace AuthToken.Business.Services
         }
 
 
+        public void ForgotPassword(ForgotPasswordAuthViewModel model)
+        {
+            var user = _userManager.FindByEmailAsync(model.Email).Result;
+            if (user == null)
+            {
+                throw new ApplicationException("User not found.");
+            }
+            var isEmailConfirmed = _userManager.IsEmailConfirmedAsync(user).Result;
+
+            if (!isEmailConfirmed)
+            {
+                throw new ApplicationException("Email is not confirmed.");
+            }
+
+            var code = _userManager.GeneratePasswordResetTokenAsync(user).Result;
+
+            var url =$"{_configuration["FrontEndUrl"]}authorization/reset-password?userId={HttpUtility.UrlEncode(user.Id)}&code={HttpUtility.UrlEncode(code)}";
+
+            var subject = "ForgotPassword";
+            _emailSender.SendMail(user.Email, subject, url);
+        }
+
+
+        public void ResetPassword(ResetPasswordAuthViewModel model)
+        {
+            var userId = HttpUtility.UrlDecode(model.UserId);
+            var user = _userManager.FindByIdAsync(userId).Result;
+            if (user == null)
+            {
+                throw new ApplicationException("User not found.");
+            }
+
+            var validCode = model.Code.Replace(" ", "+");
+            var result = _userManager.ResetPasswordAsync(user, validCode, model.Password).Result;
+            if (!result.Succeeded)
+            {
+                throw new ApplicationException(result.GetErrors());
+            }
+        }
+
+
+        public void ChangePassword(string email, ChangePasswordAuthViewModel model)
+        {
+            var user = _userManager.FindByEmailAsync(email).GetAwaiter().GetResult();
+            if (user == null)
+            {
+                throw new ApplicationException("User not found.");
+            }
+
+            var result = _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).GetAwaiter().GetResult();
+            if (!result.Succeeded)
+            {
+                throw new ApplicationException(result.GetErrors());
+            }
+
+            _signInManager.SignInAsync(user, isPersistent: false).GetAwaiter().GetResult();
+        }
+
+
         private string GenerateJwtToken(ApplicationUser user)
         {
             var userRoles = _userManager.GetRolesAsync(user).GetAwaiter().GetResult();
@@ -157,8 +221,8 @@ namespace AuthToken.Business.Services
             var expires = DateTime.Now.AddDays(Convert.ToDouble("7"));
 
             var token = new JwtSecurityToken(
-                "http://localhost:1194",
-                "http://localhost:1194",
+                _configuration["BackEndUrl"],
+                _configuration["BackEndUrl"],
                 claims,
                 expires: expires,
                 signingCredentials: creds

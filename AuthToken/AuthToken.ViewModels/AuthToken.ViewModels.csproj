@@ -37,6 +37,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,7 +53,10 @@
     <Compile Include="Books\GetByIdBooksView.cs" />
     <Compile Include="Goods\GetGoodsView.cs" />
     <Compile Include="Goods\Items\GetGoodsViewItem.cs" />
+    <Compile Include="Models\Auth\ChangePasswordAuthViewModel.cs" />
     <Compile Include="Models\Auth\ConfirmEmailAuthViewModel.cs" />
+    <Compile Include="Models\Auth\ForgotPasswordAuthViewModel.cs" />
+    <Compile Include="Models\Auth\ResetPasswordAuthViewModel.cs" />
     <Compile Include="Models\Auth\SignUpAuthViewModel.cs" />
     <Compile Include="Models\Auth\LogInAuthViewModel.cs" />
     <Compile Include="Models\Error\ErrorResponseView.cs" />

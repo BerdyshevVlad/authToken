@@ -154,7 +154,12 @@
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\authorization\authorization.component.html" />
+    <Content Include="src\app\authorization\email-confirm\email-confirm.component.html" />
+    <Content Include="src\app\authorization\forgot-password\forgot-password.component.html" />
     <Content Include="src\app\authorization\login\login.component.html" />
+    <Content Include="src\app\authorization\reset-password\reset-password.component.html" />
+    <Content Include="src\app\authorization\signup\signup.component.html" />
+    <Content Include="src\app\home\home.component.html" />
     <Content Include="src\favicon.ico" />
     <Content Include="src\index.html" />
     <Content Include="src\styles.css" />
@@ -175,10 +180,16 @@
     <Content Include="src\assets\.gitkeep" />
     <Content Include="src\app\authorization\authorization.component.scss" />
     <Content Include="src\app\authorization\login\login.component.scss" />
+    <Content Include="src\app\authorization\signup\signup.component.scss" />
+    <Content Include="src\app\authorization\reset-password\reset-password.component.scss" />
+    <Content Include="src\app\authorization\forgot-password\forgot-password.component.scss" />
+    <Content Include="src\app\authorization\email-confirm\email-confirm.component.scss" />
+    <Content Include="src\app\home\home.component.scss" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="src\assets\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -200,10 +211,18 @@
     <TypeScriptCompile Include="src\app\authorization\authorization.module.ts" />
     <TypeScriptCompile Include="src\app\authorization\authorization-routing.module.ts" />
     <TypeScriptCompile Include="src\app\authorization\authorization.component.ts" />
+    <TypeScriptCompile Include="src\app\authorization\email-confirm\email-confirm.component.ts" />
+    <TypeScriptCompile Include="src\app\authorization\forgot-password\forgot-password.component.ts" />
     <TypeScriptCompile Include="src\app\authorization\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\authorization\reset-password\reset-password.component.ts" />
+    <TypeScriptCompile Include="src\app\authorization\signup\signup.component.ts" />
+    <TypeScriptCompile Include="src\app\home\home-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\home\home.component.ts" />
+    <TypeScriptCompile Include="src\app\home\home.module.ts" />
     <TypeScriptCompile Include="src\app\services\authentication.service.ts" />
     <TypeScriptCompile Include="src\app\shared\models\user-data.model.ts" />
     <TypeScriptCompile Include="src\app\shared\models\user.model.ts" />
+    <TypeScriptCompile Include="src\app\shared\shared.module.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />
